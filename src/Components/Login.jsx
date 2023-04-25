@@ -2,8 +2,9 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProviders';
 
+
 const Login = () => {
-    const {signin,}=useContext(AuthContext)
+    const {signin, signInwithgoogle}=useContext(AuthContext)
     const handleLogin=event=>{
         event.preventDefault();
         const form=event.target;
@@ -19,6 +20,16 @@ const Login = () => {
             console.log(error);
         })
 
+    }
+    const handlegooglesignin = ()=>{
+        signInwithgoogle()
+        .then(result=>{
+            const loggedUser = result.user;
+            console.log(loggedUser)
+        })
+        .catch(error=>{
+            console.log(error)
+        })
     }
 return (
 <div>
@@ -51,8 +62,9 @@ return (
                     </div>
                 </form>
                 <Link to="/registration">
-            <button className="btn btn-active btn-link">New To Auth Master!</button>
+            <button className="btn btn-active btn-link">New To Auth Master!Please Register</button>
             </Link>
+            <button onClick={handlegooglesignin} className="btn btn-primary">Google Login</button>
             </div>
             
              
